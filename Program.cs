@@ -62,6 +62,31 @@ namespace ConsoleApp1
 
         static void MarcaSalida(Estado est)
         {
+            int i = 0, j = 0, coordx, coordy, dirx = 0, diry = 0;
+            char objetivo = est.obj;
+            bool ok = false;
+
+            while (i < est.mat.GetLength(0))
+            {
+                while (j < est.mat.GetLength(1))
+                {
+                    if (est.mat[i,j] == objetivo)
+                    {
+                        coordx = i;
+                        coordy = j;
+
+                        LocalizaDir(i, j, ref dirx, ref diry);
+
+                        ok = true;
+                    }
+                    j++;
+                }
+                i++;
+            }
+        }
+
+        static void LocalizaDir(int x, int y, ref int dirx, ref int diry)
+        {
 
         }
 

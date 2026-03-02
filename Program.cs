@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Javier Hoyos Giunta
+// Hector Prous 
+using System;
 using System.IO;
 using System.Numerics;
 namespace ConsoleApp1
@@ -62,7 +64,7 @@ namespace ConsoleApp1
 
         static void MarcaSalida(Estado est)
         {
-            int i = 0, j = 0, coordx, coordy, dirx = 0, diry = 0;
+            int i = 0, j = 0, coordx = 0, coordy = 0, dirx = 0, diry = 0;
             char objetivo = est.obj;
             bool ok = false;
 
@@ -70,12 +72,12 @@ namespace ConsoleApp1
             {
                 while (j < est.mat.GetLength(1))
                 {
-                    if (est.mat[i,j] == objetivo)
+                    if (est.mat[i, j] == objetivo)
                     {
                         coordx = i;
                         coordy = j;
 
-                        LocalizaDir(i, j, ref dirx, ref diry);
+                        BuscaCabeza(); // aquí falta ajustar algo pq el metodo es void y no va a devolver nada, arreglar
 
                         ok = true;
                     }
@@ -83,11 +85,17 @@ namespace ConsoleApp1
                 }
                 i++;
             }
-        }
 
-        static void LocalizaDir(int x, int y, ref int dirx, ref int diry)
-        {
-
+            if (dirx == 0) // diry tiene que ser uno, la dir es (0,1), vertical
+            {
+                est.sal.x = coordx;
+                // falta aquí sal.y
+            }
+            else // dirx es 1, diry tiene que ser 0, la dir es (1,0), horizontal
+            {
+                est.sal.y = coordy;
+                // falta aquí sal.x
+            }
         }
 
         static void MueveCursor(Estado est, Coor dir)
